@@ -19,42 +19,41 @@ independently and should be very familiar to anyone who has worked with their MD
 
 1. Copy the repository structure to a new directory for the project name.
   1. Not recommended to clone or fork this repository, as it is better to do an
-    inital commit with a clean repository history in any new project.
+    initial commit with a clean repository history in any new project.
 1. Configure the project by setting the properties in the `gradle.properties`
-    file. NOTE: mod_name should match folder name of your project, or else
+    file. NOTE: mod_name should match the folder name of your project, or else
     IDEA may complain.
 
-NOTE: The follwing could probably trivially be scripted, or you can use
+**NOTE**: The following could probably be trivially scripted, or you can use
 refactoring in IDEA to do this.
 
-1. relocate the following files and folders to match your ${mod_id}
-  1. In Common directory:
-    1. In Common/src/main/resources:
-      1. Rename files and replace examplemod with your ${mod_id}
-    1. mv Common/src/main/java/examplemod Common/src/main/java/${mod_id}
-    1. rename ExampleMod.java to ${mod_name}.java
-      1. Change the class to ${mod_name}
-      1. Update MODID and MOD_NAME to reflect your ${mod_id} and ${mod_name}
-    1. relocate packages from examplemod to ${mod_id} in all of the .java files in Common/src/main/java
-  1. In Fabric directory:
-    1. In Fabric/src/main/resources:
-      1. Rename files and replace examplemod with your ${mod_id}
-    1. mv Fabric/src/main/java/examplemod Fabric/src/main/java/${mod_id}
-    1. rename ExampleModFabric.java to ${mod_name}Fabric.java
-      1. Change the class to ${mod_name}Fabric
-    1. rename ExampleModFabricClient.java to ${mod_name}FabricClient.java
-      1. Change the package locations from examplemod to ${mod_id}
-      1. Change the class to ${mod_name}FabricClient
-    1. In FabricConfigInitializer.java change ExampleMod to ${mod_name}
-      1. Change the package locations from examplemod to ${mod_id}
-    1. relocate packages from examplemod to ${mod_id} in all of the .java files in Fabric/src/main/java
-  1. In NeoForge directory:
-    1. mv NeoForge/src/main/java/examplemod NeoForge/src/main/java/${mod_id}
-    1. rename ExampleModNeoForge.java to ${mod_name}NeoForge.java
-      1. Note that for 1.20.1 template this is actually using Forge, but for
-        the purpose of cherry-picking backports, it is far simpler to have paths match.
-      1. Change the class to ${mod_name}NeoForge
-    1. relocate packages from examplemod to ${mod_id} in all of the .java files in Fabric/src/main/java
+1. Relocate the following files and folders to match your ${mod_id}
+    1. In the Common directory:
+        1. In Common/src/main/resources:
+        1. Rename files and replace examplemod with your `${mod_id}`
+    1. mv Common/src/main/java/examplemod Common/src/main/java/`${mod_id}`
+    1. Rename ExampleMod.java to ${mod_name}.java
+        1. Change the class to ${mod_name}
+        1. Update MODID and MOD_NAME to reflect your ${mod_id} and ${mod_name}
+        1. relocate packages from examplemod to ${mod_id} in all of the .java files in Common/src/main/java
+    1. In Fabric directory:
+        1. In Fabric/src/main/resources:
+            1. Rename files and replace examplemod with your `${mod_id}`
+        1. mv Fabric/src/main/java/examplemod Fabric/src/main/java/`${mod_id}`
+        1. rename ExampleModFabric.java to `${mod_name}`Fabric.java
+            1. Change the class to `${mod_name}`Fabric
+        1. rename ExampleModFabricClient.java to `${mod_name}`FabricClient.java
+            1. Change the package locations from examplemod to ${mod_id}
+            1. Change the class to `${mod_name}`FabricClient
+        1. In FabricConfigInitializer.java, change ExampleMod to `${mod_name}`
+        1. Relocate packages from examplemod to `${mod_id}` in all of the .java files in Fabric/src/main/java
+    1. In NeoForge directory:
+        1. mv NeoForge/src/main/java/examplemod NeoForge/src/main/java/`${mod_id}`
+        1. rename ExampleModNeoForge.java to `${mod_name}`NeoForge.java
+            1. Note that for 1.20.1 template, this is actually using Forge, but for
+               the purpose of cherry-picking backports, it is far simpler to have paths match.
+        1. Change the class to `${mod_name}`NeoForge
+        1. Relocate packages from examplemod to `${mod_id}` in all of the .java files in Fabric/src/main/java
 1. Open the template's root folder as a new project in IDEA. This is the folder
     that contains this README.md file and the gradlew executable.
 1. If your default JVM/JDK is not Java 21 you will encounter an error when
@@ -67,7 +66,7 @@ refactoring in IDEA to do this.
 1. Open your Run/Debug Configurations. Under the `Application` category there
     should now be options to run Fabric and NeoForge projects. Select one of the
     client options and try to run it.
-  1. Assuming you were able to run the game in this step, your workspace should now be set up.
+    1. Assuming you were able to run the game in this step, your workspace should now be set up.
 
 ## Development Guide
 When using this template the majority of your mod should be developed in the
