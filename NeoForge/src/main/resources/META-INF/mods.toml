@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="${forge_version_range}"
+license="${license}"
+logoBlur=false
+issueTrackerURL="https://github.com/${mod_author}/${mod_name}/issues"
+logoFile="${mod_id}_icon.png"
+
+[[mods]]
+    modId="${mod_id}"
+    displayName="${mod_name}"
+    description='''
+    ${mod_description}
+    '''
+    version="${version}"
+    updateJSONURL="https://raw.githubusercontent.com/${mod_author}/${mod_name}/${mod_update_branch}/files/updates.json"
+    authors="${mod_author}"
+    credits="${mod_credits}"
+    logoFile="${mod_id}_icon.png"
+[[dependencies.${mod_id}]]
+    modId="forge"
+    mandatory=true
+    versionRange="${forge_version_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${forge_mc_version_range}"
+    ordering="NONE"
+    side="BOTH"
