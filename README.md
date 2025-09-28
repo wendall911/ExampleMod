@@ -82,3 +82,23 @@ to load the `Common` project into the game. These projects also define code
 that is specific to that loader. Loader specific projects can access all the
 code in the `Common` project. It is important to remember that the `Common`
 project can not access code from loader specific projects.
+
+### Steps to Release New Version
+1. Bump `version` in gradle.properties and update `last_mod_version` to be whatever you changed `version` from.
+1. Run `./scripts/release_dryrun`
+    1. This will update files/updates.json and post the version release to your
+       Discord Dryrun Url if using Discord webhook. Or dump information in the log
+       for the release.
+1. Commit the changes in `gradle.properties` and `files/updates.json`
+    1. git commit -a -m "Release 1.20.1-`${version}`"
+    1. git tag 1.20.1-`${version}`
+    1. git push
+    1. git push --tags
+1. Run `./scripts/do_release`
+1. Profit!!!
+
+### Update gradlew and gradle-wrapper.jar
+`./gradlew wrapper --gradle-version latest`
+
+### Set java version globally while developing on Fedora
+`sudo alternatives --config java`
