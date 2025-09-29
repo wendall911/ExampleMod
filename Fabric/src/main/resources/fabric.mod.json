@@ -21,7 +21,7 @@
       "${mod_id}.${mod_name}Fabric"
     ],
     "client": [
-      "${mod_id}.${mod_name}FabricClient"
+      "${mod_id}.${mod_name}ClientFabric"
     ],
     "whitenoise": [
       "${mod_id}.FabricConfigInitializer"
