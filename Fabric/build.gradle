@@ -25,6 +25,19 @@ dependencies {
     modImplementation group: 'technology.roughness.whitenoise', name: "whitenoise-${minecraft_version}-fabric", version: "${whitenoise_range}"
     include group: 'technology.roughness.whitenoise', name: "whitenoise-${minecraft_version}-fabric", version: "${whitenoise_version}"
 
+    modApi "dev.architectury:architectury-fabric:${architectury_version}"
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}"
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
+
+    modCompileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    modCompileOnly "mezz.jei:jei-${minecraft_version}-fabric:${jei_version}"
+
+    modLocalRuntime group: 'com.terraformersmc', name: 'modmenu', version: "${mod_menu_version}"
+
     // Testing Mods
     //modRuntimeOnly "curse.maven:mod-XXX:XXX"
 }
@@ -49,16 +62,37 @@ loom {
             ideConfigGenerated(true)
             runDir("run")
         }
+        commonDatagen {
+            client()
+            vmArg "-D${mod_id}.common_datagen=1"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.modid=${mod_id}"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("../Common/src/generated/resources")}"
+        }
+        fabricDatagen {
+            client()
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.modid=${mod_id}"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/generated/resources")}"
+        }
     }
 }
 
+sourceSets.main.resources.srcDir 'src/generated/resources'
+
 def resourceTargets = ['fabric.mod.json', 'pack.mcmeta', '*.mixins.json']
 def replaceProperties = [
-    'version': actualVersion, 'fabric_mc_version_range': fabric_mc_version_range,
-    'license': license, 'mod_id': mod_id, 'mod_author': mod_author,
-    'mod_description': mod_description, 'mod_name': mod_name,
+    'version': actualVersion,
+    'fabric_mc_version_range': fabric_mc_version_range,
+    'license': license,
+    'mod_id': mod_id,
+    'mod_author': mod_author,
+    'mod_description': mod_description,
+    'mod_name': mod_name,
     'fabric_loader_min_version': fabric_loader_min_version,
-    'mod_credits': mod_credits, 'java_version': java_version
+    'mod_credits': mod_credits,
+    'java_version': java_version,
+    'pack_format': pack_format
 ]
 
 processResources {
@@ -70,6 +104,14 @@ processResources {
 
     filesMatching(resourceTargets) {
         expand replaceProperties
+    }
+
+    /*
+     * This is for things that have dedicated NeoForge datagen like
+     * Patchouli that need data compied over.
+    */
+    from ('../Forge/src/generated/resources/') {
+        exclude '**/recipes/*'
     }
 }
 
@@ -98,6 +140,7 @@ publishMods {
             clientRequired = true
             serverRequired = true
             minecraftVersions.addAll("${release_versions}".split(','))
+            requires('fabric-api')
             optional('actually-harvest')
             optional('betterdays')
             optional('charged-charms')

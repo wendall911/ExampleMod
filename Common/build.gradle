@@ -18,11 +18,23 @@ dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: "${mixin_version}"
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     implementation group: 'technology.roughness.whitenoise', name: "whitenoise-${minecraft_version}-common", version: "${whitenoise_version}"
+
+    compileOnly "mezz.jei:jei-${minecraft_version}-common:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
 }
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+def replaceProperties = [
+    'mod_name': mod_name,
+    'pack_format': pack_format
+]
 
 processResources {
     filesMatching("pack.mcmeta") {
-        expand 'mod_name': project.mod_name
+        expand replaceProperties
     }
 }
 

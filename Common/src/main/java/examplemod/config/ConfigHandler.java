@@ -51,14 +51,17 @@ public class ConfigHandler {
             builder.push("General");
 
             debugEnabled = builder
+                .worldRestart()
                 .comment("Show debug info.")
                 .define("debugEnabled", false);
 
             builder.push("Items");
 
             disableExampleItem = builder.comment("Disable example item.")
+                .clientRestart()
                 .define("disableExampleItem", false);
             exampleItemDurability = builder.comment("Example item durability.")
+                .clientRestart()
                 .defineInRange("exampleItemDurability", 15, 1, 100);
         }
 

@@ -1,0 +1,27 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "examplemod:config_disabled",
+      "config": "disableExampleItem"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "K": {
+      "item": "minecraft:kelp"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "NKN",
+    "NNN"
+  ],
+  "result": {
+    "item": "examplemod:example_item"
+  },
+  "show_notification": true
+}

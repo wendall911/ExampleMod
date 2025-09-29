@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "conditions": [
+    {
+      "type": "examplemod:config_disabled",
+      "config": "disableExampleItem"
+    }
+  ],
+  "key": {
+    "K": {
+      "item": "minecraft:kelp"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "NKN",
+    "NNN"
+  ],
+  "result": {
+    "item": "examplemod:example_item"
+  },
+  "show_notification": true
+}

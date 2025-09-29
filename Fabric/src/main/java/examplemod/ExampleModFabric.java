@@ -19,7 +19,6 @@ public class ExampleModFabric implements ModInitializer {
         ExampleMod.init();
     }
 
-
     private void registryInit() {
         ExampleModItems.registerItems(bind(BuiltInRegistries.ITEM));
     }
