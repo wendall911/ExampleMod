@@ -28,7 +28,7 @@ sourceSets.main.resources {
 }
 
 def replaceProperties = [
-    'mod_name': mod_name,
+    'mod_display_name': mod_display_name,
     'pack_format': pack_format
 ]
 

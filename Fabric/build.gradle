@@ -88,6 +88,7 @@ def replaceProperties = [
     'mod_id': mod_id,
     'mod_author': mod_author,
     'mod_description': mod_description,
+    'mod_display_name': mod_display_name,
     'mod_name': mod_name,
     'fabric_loader_min_version': fabric_loader_min_version,
     'mod_credits': mod_credits,

@@ -22,6 +22,9 @@ mixin {
 minecraft {
     mappings channel: 'parchment', version: "${mappings_version}-${minecraft_version}"
 
+    // Automatically enable forge AccessTransformers if the file exists
+    // This location is hardcoded in Forge and can not be changed.
+    // https://github.com/MinecraftForge/MinecraftForge/blob/be1698bb1554f9c8fa2f58e32b9ab70bc4385e60/fmlloader/src/main/java/net/minecraftforge/fml/loading/moddiscovery/ModFile.java#L123
     if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
         accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     }
@@ -35,6 +38,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             args "-mixin.config=${mod_id}.mixins.json"
+            args "-mixin.config=${mod_id}.forge.mixins.json"
             mods {
                 modClientRun {
                     source sourceSets.main
@@ -50,6 +54,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             args "-mixin.config=${mod_id}.mixins.json"
+            args "-mixin.config=${mod_id}.forge.mixins.json"
             mods {
                 modServerRun {
                     source sourceSets.main
@@ -66,6 +71,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             args "-mixin.config=${mod_id}.mixins.json"
+            args "-mixin.config=${mod_id}.forge.mixins.json"
             mods {
                 modDataRun {
                     source sourceSets.main
@@ -89,8 +95,8 @@ dependencies {
         jarJar.ranged(it, "${whitenoise_range}")
     }
 
-	compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-	implementation fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    implementation fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
     // This stupidity is needed in Forge, since
     // they don't ingore other mods datagen when running datagen locally.
@@ -123,6 +129,7 @@ def replaceProperties = [
     'mod_id': mod_id,
     'mod_author': mod_author,
     'mod_description': mod_description,
+    'mod_display_name': mod_display_name,
     'mod_name': mod_name,
     'mod_credits': mod_credits,
     'mod_update_branch': mod_update_branch,

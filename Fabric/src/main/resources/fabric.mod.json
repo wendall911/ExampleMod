@@ -28,11 +28,18 @@
     "fabric-datagen": [
       "${mod_id}.data.FabricDatagenInitializer"
     ],
+    "rei_client": [
+      "${mod_id}.client.integration.rei.REIPlugin"
+    ],
+    "jei_mod_plugin": [
+      "${mod_id}.client.integration.jei.JEIPlugin"
+    ],
     "whitenoise": [
       "${mod_id}.FabricConfigInitializer"
     ]
   },
   "mixins": [
+    "${mod_id}.mixins.json",
     "${mod_id}.fabric.mixins.json"
   ],
   "depends": {
