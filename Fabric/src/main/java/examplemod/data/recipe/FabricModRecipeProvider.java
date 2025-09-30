@@ -1,20 +1,22 @@
 package examplemod.data.recipe;
 
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
 import org.jetbrains.annotations.NotNull;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeOutput;
 
 import examplemod.ExampleMod;
 
 public class FabricModRecipeProvider extends FabricRecipeProvider {
 
-    public FabricModRecipeProvider(FabricDataOutput output) {
-        super(output);
+    public FabricModRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryFuture) {
+        super(output, registryFuture);
     }
 
     @Override
@@ -23,8 +25,11 @@ public class FabricModRecipeProvider extends FabricRecipeProvider {
     }
 
     @Override
-    public void buildRecipes(Consumer<FinishedRecipe> consumer) {
-        RecipeProviderBase.exampleItem().save(withConditions(consumer, ConfigResourceCondition.configDisabled("disableExampleItem")));
+    public void buildRecipes(RecipeOutput recipeOutput) {
+        RecipeProviderBase.exampleItem().save(withConditions(
+            recipeOutput,
+            new ConfigResourceCondition("disableExampleItem")
+        ));
     }
 
 }

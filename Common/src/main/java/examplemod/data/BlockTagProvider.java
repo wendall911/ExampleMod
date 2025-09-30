@@ -2,6 +2,8 @@ package examplemod.data;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -10,12 +12,13 @@ import net.minecraft.world.level.block.Block;
 
 public class BlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 
+    @SuppressWarnings("deprecation")
     public BlockTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(packOutput, Registries.BLOCK, lookupProvider, (block) -> block.builtInRegistryHolder().key());
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider provider) {
+    protected void addTags(HolderLookup.@NotNull Provider provider) {
 
     }
 

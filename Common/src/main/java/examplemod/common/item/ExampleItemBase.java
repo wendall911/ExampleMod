@@ -14,9 +14,4 @@ public class ExampleItemBase extends Item {
         return false;
     }
 
-    @Override
-    public boolean isEdible() {
-        return false;
-    }
-
 }

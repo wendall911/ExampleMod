@@ -31,7 +31,7 @@ public class FabricDatagenInitializer implements DataGeneratorEntrypoint {
     public static void configureCommonDatagen(FabricDataGenerator.Pack pack) {
         pack.addProvider((dataOutput, registryFuture) -> new CommonItemTagProvider(dataOutput, registryFuture, fabricBlockTagProvider.contentsGetter()));
         pack.addProvider((dataOutput, registryFuture) -> new FabricItemModelProvider(dataOutput));
-        pack.addProvider((dataOutput, registryFuture) -> new CommonRecipeProvider(dataOutput));
+        pack.addProvider(CommonRecipeProvider::new);
         pack.addProvider(ExampleModLanguageProvider::new);
     }
 
@@ -40,7 +40,7 @@ public class FabricDatagenInitializer implements DataGeneratorEntrypoint {
      */
     public static void configureFabricDatagen(FabricDataGenerator.Pack pack) {
         pack.addProvider((dataOutput, registryFuture) -> new FabricItemTagProvider(dataOutput, registryFuture, fabricBlockTagProvider.contentsGetter()));
-        pack.addProvider((dataOutput, registryFuture) -> new FabricModRecipeProvider(dataOutput));
+        pack.addProvider(FabricModRecipeProvider::new);
     }
 
 }

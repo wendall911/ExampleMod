@@ -1,7 +1,7 @@
 package examplemod.event;
 
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
 import examplemod.config.ConfigHandler;
 

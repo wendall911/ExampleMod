@@ -3,12 +3,12 @@ package examplemod.client.integration.rei;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.entry.EntryRegistry;
 import me.shedaniel.rei.api.common.entry.EntryStack;
-import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 
 import net.minecraft.world.item.ItemStack;
 
 import examplemod.common.item.ExampleModItems;
 import examplemod.config.ConfigHandler;
+import examplemod.platform.Services;
 
 public class REIPlugin implements REIClientPlugin {
 
@@ -18,7 +18,7 @@ public class REIPlugin implements REIClientPlugin {
     }
 
     private boolean shouldHideEntry(EntryStack<?> entryStack) {
-        if (entryStack.getType() != VanillaEntryTypes.ITEM) return false;
+        if (!Services.REI_HELPER.isVanillaItemType(entryStack)) return false;
 
         ItemStack stack = entryStack.castValue();
 

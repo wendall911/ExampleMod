@@ -1,32 +1,27 @@
 package examplemod.data.recipe;
 
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
 import org.jetbrains.annotations.NotNull;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
 
-import examplemod.ExampleMod;
+public class CommonRecipeProvider extends RecipeProvider {
 
-public class CommonRecipeProvider extends RecipeProviderBase {
-
-    public CommonRecipeProvider(@NotNull final PackOutput packOutput) {
-        super(packOutput);
+    public CommonRecipeProvider(@NotNull final PackOutput packOutput, CompletableFuture<HolderLookup.Provider> registryFuture) {
+        super(packOutput, registryFuture);
     }
 
     @Override
-    public String getName() {
-        return ExampleMod.MOD_NAME + " - Recipes";
-    }
-
-    @Override
-    protected void registerRecipes(Consumer<FinishedRecipe> consumer) {
+    public void buildRecipes(@NotNull RecipeOutput recipeOutput) {
         /*
          * Disabling in favor of config condition.
          * Example of an item if just wanting a generic registration.
          */
-        //exampleItem().save(consumer);
+        //RecipeProviderBase.exampleItem().save(recipeOutput);
     }
 
 }

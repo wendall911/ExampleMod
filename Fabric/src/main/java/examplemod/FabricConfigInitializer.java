@@ -2,12 +2,11 @@ package examplemod;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 
-import technology.roughness.whitenoise.config.WhiteNoiseInitializer;
+import technology.roughness.whitenoise.config.WhiteNoiseConfigInitializer;
 
 import examplemod.config.ConfigHandler;
-import examplemod.data.recipe.ConfigResourceCondition;
 
-public class FabricConfigInitializer implements WhiteNoiseInitializer {
+public class FabricConfigInitializer implements WhiteNoiseConfigInitializer {
 
     @Override
     public void onInitializeConfig() {
@@ -16,8 +15,6 @@ public class FabricConfigInitializer implements WhiteNoiseInitializer {
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
             ConfigHandler.init();
         });
-
-        ConfigResourceCondition.init();
     }
 
 }

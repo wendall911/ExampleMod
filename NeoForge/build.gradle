@@ -1,203 +1,84 @@
 plugins {
-    id 'idea'
-    id 'maven-publish'
-    id 'net.minecraftforge.gradle'
-    id 'org.parchmentmc.librarian.forgegradle'
-    id 'org.spongepowered.mixin'
-    id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin'
-    id 'me.modmuss50.mod-publish-plugin'
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev'
+    id 'io.github.goooler.shadow'
 }
 
+
+def modLoader = "${project.name}".toUpperCase()
 def actualVersion = version
-version = "${minecraft_version}-${version}-FORGE"
-archivesBaseName = "${mod_id}"
+version = "${version}-${modLoader}"
 
-mixin {
-    add sourceSets.main, "${mod_id}-refmap.json"
-
-    config "${mod_id}.mixins.json"
-    config "${mod_id}_forge.mixins.json"
-}
-
-minecraft {
-    mappings channel: 'parchment', version: "${mappings_version}-${minecraft_version}"
-
-    // Automatically enable forge AccessTransformers if the file exists
-    // This location is hardcoded in Forge and can not be changed.
-    // https://github.com/MinecraftForge/MinecraftForge/blob/be1698bb1554f9c8fa2f58e32b9ab70bc4385e60/fmlloader/src/main/java/net/minecraftforge/fml/loading/moddiscovery/ModFile.java#L123
-    if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
-        accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+neoForge {
+    version = neoforge_version
+    // Automatically enable neoforge AccessTransformers if the file exists
+    def at = project(':Common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.from(at.absolutePath)
     }
-
+    parchment {
+        minecraftVersion = minecraft_version
+        mappingsVersion = mappings_version
+    }
     runs {
+        configureEach {
+            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
+        }
         client {
-            workingDirectory project.file('run')
-            property 'forge.logging.console.level', 'debug'
-            ideaModule "${rootProject.name}.${project.name}.main"
-            taskName 'Client'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            args "-mixin.config=${mod_id}.mixins.json"
-            args "-mixin.config=${mod_id}.forge.mixins.json"
-            mods {
-                modClientRun {
-                    source sourceSets.main
-                    source project(":Common").sourceSets.main
-                }
-            }
+            client()
         }
         server {
-            workingDirectory project.file('run')
-            property 'forge.logging.console.level', 'debug'
-            ideaModule "${rootProject.name}.${project.name}.main"
-            taskName 'Server'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            args "-mixin.config=${mod_id}.mixins.json"
-            args "-mixin.config=${mod_id}.forge.mixins.json"
-            mods {
-                modServerRun {
-                    source sourceSets.main
-                    source project(":Common").sourceSets.main
-                }
-            }
+            server()
+            programArgument '--nogui'
         }
         data {
-            workingDirectory project.file('run')
-            property 'forge.logging.console.level', 'debug'
-            ideaModule "${rootProject.name}.${project.name}.main"
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-            taskName 'Data'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            args "-mixin.config=${mod_id}.mixins.json"
-            args "-mixin.config=${mod_id}.forge.mixins.json"
-            mods {
-                modDataRun {
-                    source sourceSets.main
-                    source project(":Common").sourceSets.main
-                }
-            }
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+            data()
+        }
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
         }
     }
 }
 
-sourceSets.main.resources.srcDir 'src/generated/resources'
-
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
-    compileOnly project(":Common")
+    implementation group: 'technology.roughness.whitenoise', name: "whitenoise-${minecraft_version}-neoforge", version: "${whitenoise_version}"
+    jarJar group: 'technology.roughness.whitenoise', name: "whitenoise-${minecraft_version}-neoforge", version: "${whitenoise_version}"
 
-    implementation fg.deobf(group: 'technology.roughness.whitenoise', name: "whitenoise-${minecraft_version}-forge", version: "${whitenoise_version}")
-    jarJar fg.deobf(group: 'technology.roughness.whitenoise', name: "whitenoise-${minecraft_version}-forge", version: "${whitenoise_version}") {
-        jarJar.pin(it, "${whitenoise_version}")
-        jarJar.ranged(it, "${whitenoise_range}")
-    }
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    implementation "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-    implementation fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    compileOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
 
-    // This stupidity is needed in Forge, since
-    // they don't ingore other mods datagen when running datagen locally.
-    if (System.getenv('DATA_GEN') != null) {
-        // Runtime requirements for datagen
-    }
-    else {
-        // Testing mods
-        //runtimeOnly fg.deobf("curse.maven:XXX-:")
-    }
+    // Testing mods
+    //runtimeOnly "curse.maven:XXX-:"
 }
 
-// Throw errors on warnings. Can also disable warnings here.
-compileJava {
-    source(project(":Common").sourceSets.main.allSource)
-    options.compilerArgs << "-Xlint:all,-classfile,-processing,-deprecation,-serial" << "-Werror"
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
 }
 
-tasks.withType(JavaCompile) {
-    source(project(":Common").sourceSets.main.allSource)
+shadowJar {
+    archiveClassifier = ''
 }
-
-def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta', '*.mixins.json']
-def replaceProperties = [
-    'version': actualVersion,
-    'minecraft_version': minecraft_version,
-    'forge_mc_version_range': forge_mc_version_range,
-    'forge_version_range': forge_version_range,
-    'license': license,
-    'mod_id': mod_id,
-    'mod_author': mod_author,
-    'mod_description': mod_description,
-    'mod_display_name': mod_display_name,
-    'mod_name': mod_name,
-    'mod_credits': mod_credits,
-    'mod_update_branch': mod_update_branch,
-    'pack_format': pack_format,
-    'curseforge_slug': curseforge_slug
-]
-
-processResources {
-    from project(":Common").sourceSets.main.resources
-    duplicatesStrategy(DuplicatesStrategy.FAIL)
-    inputs.properties replaceProperties
-    replaceProperties.put 'project', project
-    exclude '.cache'
-
-    filesMatching(resourceTargets) {
-        expand replaceProperties
-    }
-}
-
-tasks.jarJar.finalizedBy('reobfJar')
-jar.finalizedBy('reobfJarJar')
-
-reobf {
-    jarJar {}
-}
-
-tasks.jarJar.configure {
-    archiveClassifier.set("")
-}
-
-jarJar {
-    enable()
-}
-
-task changelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
-    file.set(new File(project(":").projectDir.toString() + '/build/libs/changelog.txt'));
-    templateContent.set(file(project(":").projectDir.toString() + '/files/templates/changelog.mustache').getText('UTF-8'));
-    toRevision.set('HEAD');
-    fromRevision.set("${minecraft_version}-${last_mod_version}");
-}
-
-def updates = tasks.register("generateUpdates", Copy) {
-    it.outputs.upToDateWhen {
-        false
-    }
-
-    it.from("../files/templates/") {
-        include 'updates.json'
-        expand replaceProperties
-    }
-
-    it.into '../files/'
-}
-
-tasks.generateUpdates.mustRunAfter('jar')
-
-tasks.build.dependsOn('changelog', 'generateUpdates')
 
 def changelogFile = project(":").projectDir.toString() + '/build/libs/changelog.txt'
 def publishFile = project(":").projectDir.toString() + "/NeoForge/build/libs/${archivesBaseName}-${version}.jar"
+def display_name = "${project.name} ${minecraft_version}-${version}"
+def display_version = "${minecraft_version}-${version}"
 
 publishMods {
     file = file(publishFile)
     if (file(changelogFile).exists()) {
         changelog = file(changelogFile).text
     }
+    displayName = "${display_name}"
+    version = "${display_version}"
     type = "${release_type}".startsWith("release") ? STABLE : ("${release_type}".startsWith("beta") ? BETA : ALPHA)
-    modLoaders.addAll(['neoforge', 'forge'])
+    modLoaders.add('neoforge')
     dryRun = providers.environmentVariable('DO_RELEASE').getOrNull() == null
 
     if (project.hasProperty("${curseforge_api_key_prop}")) {

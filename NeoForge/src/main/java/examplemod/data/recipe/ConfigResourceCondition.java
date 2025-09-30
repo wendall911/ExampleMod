@@ -1,68 +1,35 @@
 package examplemod.data.recipe;
 
-import java.util.function.BiConsumer;
+import org.jetbrains.annotations.NotNull;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.mojang.serialization.MapCodec;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 import examplemod.config.ConfigHandler;
 
-import static examplemod.util.ResourceLocationHelper.prefix;
+public record ConfigResourceCondition(String configValue) implements ICondition {
 
-public class ConfigResourceCondition implements ICondition {
-
-    public static final ResourceLocation ID = prefix("config_disabled");
-    private final String configValue;
-
-    public ConfigResourceCondition(String configValue) {
-        this.configValue = configValue;
-    }
-
-    public static void init(BiConsumer<RecipeSerializer<?>, ResourceLocation> consumer) {
-        CraftingHelper.register(Serializer.INSTANCE);
-    }
+    public static final String ID = "config_disabled";
+    public static final MapCodec<ConfigResourceCondition> CODEC = RecordCodecBuilder.mapCodec(b -> b.group(
+        Codec.STRING.fieldOf(ID).forGetter(ConfigResourceCondition::configValue)
+    ).apply(b, ConfigResourceCondition::new));
 
     @Override
     public String toString() {
-        return "config_disabled(\"" + configValue + "\")";
+        return ID + "(\"" + configValue + "\")";
     }
 
     @Override
-    public ResourceLocation getID() {
-        return ID;
-    }
-
-    @Override
-    public boolean test(IContext context) {
+    public boolean test(@NotNull IContext context) {
         return !ConfigHandler.conditionsMap.getOrDefault(configValue, false);
     }
 
-    public static class Serializer implements IConditionSerializer<ConfigResourceCondition> {
-
-        public static final Serializer INSTANCE = new Serializer();
-
-        @Override
-        public void write(JsonObject json, ConfigResourceCondition value) {
-            json.addProperty("config", value.configValue);
-        }
-
-        @Override
-        public ConfigResourceCondition read(JsonObject json) {
-            return new ConfigResourceCondition(GsonHelper.getAsString(json, "config"));
-        }
-
-        @Override
-        public ResourceLocation getID() {
-            return ConfigResourceCondition.ID;
-        }
-
+    @Override
+    public @NotNull MapCodec<? extends ICondition> codec() {
+        return CODEC;
     }
 
 }

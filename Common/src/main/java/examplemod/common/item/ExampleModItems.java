@@ -19,7 +19,7 @@ public final class ExampleModItems {
     
     public static final Item exampleItem = make(
         exampleItemId,
-        new ExampleItemBase(getProps().stacksTo(1).durability(ConfigHandler.Common.exampleItemDurability()))
+        new ExampleItemBase(getProps().durability(ConfigHandler.Common.exampleItemDurability()))
     );
 
     private static <T extends Item> T make(String id, T item) {

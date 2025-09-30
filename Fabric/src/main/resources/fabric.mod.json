@@ -34,7 +34,7 @@
     "jei_mod_plugin": [
       "${mod_id}.client.integration.jei.JEIPlugin"
     ],
-    "whitenoise": [
+    "whitenoise-config": [
       "${mod_id}.FabricConfigInitializer"
     ]
   },
@@ -45,7 +45,7 @@
   "depends": {
     "fabricloader": "${fabric_loader_min_version}",
     "fabric": "*",
-    "minecraft": "${fabric_mc_version_range}",
+    "minecraft": ${fabric_mc_version_range},
     "java": ">=${java_version}"
   }
 }

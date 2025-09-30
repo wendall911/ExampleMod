@@ -28,8 +28,8 @@ public class ConfigHandler {
     }
 
     public static void init() {
-		conditionsMap.clear();
-		conditionsMap.put("disableExampleItem", Common.disableExampleItem());
+        conditionsMap.clear();
+        conditionsMap.put("disableExampleItem", Common.disableExampleItem());
 
         loaded = true;
     }
@@ -44,8 +44,8 @@ public class ConfigHandler {
     public static class Common {
 
         public final WhiteNoiseConfigSpec.BooleanValue debugEnabled;
-		private final WhiteNoiseConfigSpec.BooleanValue disableExampleItem;
-		private final WhiteNoiseConfigSpec.IntValue exampleItemDurability;
+        private final WhiteNoiseConfigSpec.BooleanValue disableExampleItem;
+        private final WhiteNoiseConfigSpec.IntValue exampleItemDurability;
 
         public Common(WhiteNoiseConfigSpec.Builder builder) {
             builder.push("General");
