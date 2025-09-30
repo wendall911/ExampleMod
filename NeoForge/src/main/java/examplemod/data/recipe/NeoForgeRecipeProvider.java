@@ -11,9 +11,9 @@ import net.minecraftforge.common.crafting.conditions.ICondition;
 
 import examplemod.ExampleMod;
 
-public class ForgeRecipeProvider extends RecipeProviderBase {
+public class NeoForgeRecipeProvider extends RecipeProviderBase {
 
-    public ForgeRecipeProvider(@NotNull final PackOutput packOutput) {
+    public NeoForgeRecipeProvider(@NotNull final PackOutput packOutput) {
         super(packOutput);
     }
 

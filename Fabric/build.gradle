@@ -109,9 +109,9 @@ processResources {
 
     /*
      * This is for things that have dedicated NeoForge datagen like
-     * Patchouli that need data compied over.
+     * Patchouli that need data copied over.
     */
-    from ('../Forge/src/generated/resources/') {
+    from ('../NeoForge/src/generated/resources/') {
         exclude '**/recipes/*'
     }
 }

@@ -6,17 +6,17 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import examplemod.data.recipe.ForgeRecipeProvider;
+import examplemod.data.recipe.NeoForgeRecipeProvider;
 import examplemod.ExampleMod;
 
 @Mod.EventBusSubscriber(modid = ExampleMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ForgeDatagenInitializer {
+public class NeoForgeDatagenInitializer {
 
     @SubscribeEvent
     public static void configureForgeDatagen(GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();
 
-        gen.addProvider(event.includeServer(), new ForgeRecipeProvider(gen.getPackOutput()));
+        gen.addProvider(event.includeServer(), new NeoForgeRecipeProvider(gen.getPackOutput()));
     }
 
 }
