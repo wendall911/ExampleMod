@@ -37,6 +37,10 @@ dependencies {
 }
 
 loom {
+    def aw = project(":Common").file("src/main/resources/${mod_id}.accesswidener")
+    if (aw.exists()) {
+        accessWidenerPath.set(aw)
+    }
     mixin {
         defaultRefmapName.set("${mod_id}.refmap.json")
     }
@@ -80,6 +84,7 @@ processResources {
     */
     from ('../NeoForge/src/generated/resources/') {
         exclude '**/recipe/*'
+        exclude '**/recipes/*'
     }
 }
 
@@ -114,11 +119,8 @@ publishMods {
             optional('charged-charms')
             optional('creeper-fireworks')
             optional('homeostatic')
-            optional('magical-psi-revival')
             optional('simpletextoverlay')
             optional('ready-player-fun')
-            optional('survivalist-essentials')
-            optional('tinkersurvival')
         }
     }
     if (project.hasProperty("${modrinth_api_key_prop}")) {
@@ -132,11 +134,8 @@ publishMods {
             optional('charged-charms')
             optional('creeper-fireworks-mod')
             optional('homeostatic')
-            optional('magical-psi-revival')
             optional('simpletextoverlay')
             optional('ready-player-fun')
-            optional('survivalist-essentials')
-            optional('tinkersurvival')
         }
     }
     if (project.hasProperty("${discord_webhook_prop}")) {
@@ -146,24 +145,6 @@ publishMods {
             username = "${mod_author}"
             content = changelog.map {
                 "# A new version of ${mod_display_name} for Fabric ${minecraft_version} has been released! \n" + it
-            }
-        }
-    }
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId project.group
-            artifactId project.archivesBaseName
-            version project.version
-            from components.java
-        }
-    }
-    repositories {
-        if (System.getenv('local_maven') != null) {
-            maven {
-                url 'file://' + System.getenv('local_maven')
             }
         }
     }
