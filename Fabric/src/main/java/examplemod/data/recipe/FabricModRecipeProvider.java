@@ -4,12 +4,14 @@ import java.util.concurrent.CompletableFuture;
 
 import org.jetbrains.annotations.NotNull;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.world.item.Item;
+
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
-
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.recipes.RecipeOutput;
 
 import examplemod.ExampleMod;
 
@@ -25,11 +27,15 @@ public class FabricModRecipeProvider extends FabricRecipeProvider {
     }
 
     @Override
-    public void buildRecipes(RecipeOutput recipeOutput) {
-        RecipeProviderBase.exampleItem().save(withConditions(
+    protected @NotNull RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput recipeOutput) {
+        HolderLookup.RegistryLookup<Item> itemRegistry = registries.lookupOrThrow(Registries.ITEM);
+
+        RecipeProviderBase.exampleItem(itemRegistry).save(withConditions(
             recipeOutput,
             new ConfigResourceCondition("disableExampleItem")
         ));
+
+        return new CommonRecipeProvider(registries, recipeOutput);
     }
 
 }

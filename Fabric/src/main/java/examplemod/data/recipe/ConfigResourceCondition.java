@@ -6,6 +6,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraft.resources.RegistryOps;
+
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceCondition;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditionType;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
@@ -35,7 +37,8 @@ public record ConfigResourceCondition(String configValue) implements ResourceCon
     }
 
     @Override
-    public boolean test(@Nullable HolderLookup.Provider registryLookup) {
+    public boolean test(RegistryOps.@Nullable RegistryInfoLookup registryInfoLookup) {
         return !ConfigHandler.conditionsMap.getOrDefault(configValue, false);
     }
+
 }

@@ -17,12 +17,12 @@ import examplemod.ExampleMod;
 public class NeoForgeDatagenInitializer {
 
     @SubscribeEvent
-    public static void configureNeoForgeDatagen(GatherDataEvent event) {
+    public static void configureNeoForgeDatagen(GatherDataEvent.Client event) {
         DataGenerator gen = event.getGenerator();
         PackOutput packOutput = gen.getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        gen.addProvider(event.includeServer(), new NeoForgeRecipeProvider(packOutput, lookupProvider));
+        gen.addProvider(true, new NeoForgeRecipeProvider(packOutput, lookupProvider));
     }
 
 }
