@@ -45,7 +45,7 @@
   "depends": {
     "fabricloader": "${fabric_loader_min_version}",
     "fabric": "*",
-    "whitenoise": "${whitenoise_range}",
+    "whitenoise": "*",
     "minecraft": "${fabric_mc_version_range}",
     "java": ">=${java_version}"
   }
