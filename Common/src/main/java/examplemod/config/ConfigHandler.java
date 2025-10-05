@@ -7,6 +7,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import technology.roughness.whitenoise.config.WhiteNoiseConfigSpec;
 
+import examplemod.common.Translations;
+
 public class ConfigHandler {
 
     public static final WhiteNoiseConfigSpec CLIENT_SPEC;
@@ -52,15 +54,17 @@ public class ConfigHandler {
 
             debugEnabled = builder
                 .worldRestart()
-                .comment("Show debug info.")
+                .comment(getTranslation("debugenabled"))
                 .define("debugEnabled", false);
 
             builder.push("Items");
 
-            disableExampleItem = builder.comment("Disable example item.")
+            disableExampleItem = builder
+                .comment(getTranslation("disableexampleitem"))
                 .clientRestart()
                 .define("disableExampleItem", false);
-            exampleItemDurability = builder.comment("Example item durability.")
+            exampleItemDurability = builder
+                .comment(getTranslation("exampleitemdurability"))
                 .clientRestart()
                 .defineInRange("exampleItemDurability", 15, 1, 100);
         }
@@ -81,6 +85,10 @@ public class ConfigHandler {
             return COMMON.exampleItemDurability.get();
         }
 
+    }
+
+    private static String getTranslation(String key) {
+        return Translations.get(key);
     }
 
 }
