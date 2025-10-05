@@ -93,7 +93,8 @@ def replaceProperties = [
     'fabric_loader_min_version': fabric_loader_min_version,
     'mod_credits': mod_credits,
     'java_version': java_version,
-    'pack_format': pack_format
+    'pack_format': pack_format,
+    'whitenoise_range': whitenoise_range
 ]
 
 processResources {

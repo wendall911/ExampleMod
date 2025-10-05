@@ -38,7 +38,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             args "-mixin.config=${mod_id}.mixins.json"
-            args "-mixin.config=${mod_id}.forge.mixins.json"
+            args "-mixin.config=${mod_id}.neoforge.mixins.json"
             mods {
                 modClientRun {
                     source sourceSets.main
@@ -54,7 +54,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             args "-mixin.config=${mod_id}.mixins.json"
-            args "-mixin.config=${mod_id}.forge.mixins.json"
+            args "-mixin.config=${mod_id}.neoforge.mixins.json"
             mods {
                 modServerRun {
                     source sourceSets.main
@@ -71,7 +71,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             args "-mixin.config=${mod_id}.mixins.json"
-            args "-mixin.config=${mod_id}.forge.mixins.json"
+            args "-mixin.config=${mod_id}.neoforge.mixins.json"
             mods {
                 modDataRun {
                     source sourceSets.main
@@ -134,7 +134,8 @@ def replaceProperties = [
     'mod_credits': mod_credits,
     'mod_update_branch': mod_update_branch,
     'pack_format': pack_format,
-    'curseforge_slug': curseforge_slug
+    'curseforge_slug': curseforge_slug,
+    'whitenoise_range': whitenoise_range
 ]
 
 processResources {
