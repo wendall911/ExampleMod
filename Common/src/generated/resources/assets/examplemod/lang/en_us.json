@@ -1,4 +1,15 @@
 {
+  "examplemod.configuration.debugenabled.description": "Show debug info.\nAnd do other stuff.",
+  "examplemod.configuration.debugenabled.name": "Enable Debug",
+  "examplemod.configuration.disableexampleitem.description": "Disable example item.",
+  "examplemod.configuration.disableexampleitem.name": "Disable Example Item",
+  "examplemod.configuration.exampleitemdurability.description": "Example item durability.",
+  "examplemod.configuration.exampleitemdurability.name": "Example Item Durability",
+  "examplemod.configuration.general.description": "General Settings",
+  "examplemod.configuration.general.name": "General Settings",
+  "examplemod.configuration.items.description": "Item Settings",
+  "examplemod.configuration.items.name": "Item Settings",
+  "examplemod.configuration.title": "Example Mod",
   "item.examplemod.example_item": "Example Item Name",
   "itemGroup.examplemod": "Example Mod"
 }
