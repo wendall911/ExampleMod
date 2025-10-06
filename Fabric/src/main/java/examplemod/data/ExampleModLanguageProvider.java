@@ -38,7 +38,6 @@ public class ExampleModLanguageProvider extends FabricLanguageProvider {
         builder.add("item." + ExampleMod.MODID + "." + id, name);
     }
 
-
     private void addTranslationTitle(TranslationBuilder builder, String title) {
         builder.add(ExampleMod.MODID + ".configuration.title", title);
     }
@@ -49,6 +48,10 @@ public class ExampleModLanguageProvider extends FabricLanguageProvider {
 
     private void addTranslationDescription(TranslationBuilder builder, String id) {
         builder.add(ExampleMod.MODID + ".configuration." + id + ".description", Translations.get(id));
+    }
+
+    private void addTranslationDescription(TranslationBuilder builder, String id, String key) {
+        builder.add(ExampleMod.MODID + ".configuration." + id + ".description", Translations.get(key));
     }
 
 }
