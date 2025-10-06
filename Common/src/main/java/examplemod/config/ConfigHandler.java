@@ -91,5 +91,8 @@ public class ConfigHandler {
         return Translations.get(key);
     }
 
-}
+    private static String getTranslation(String key, String... values) {
+        return Translations.get(key, values);
+    }
 
+}

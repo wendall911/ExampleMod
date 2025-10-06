@@ -5,6 +5,8 @@ import java.util.Map;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
 
+import org.slf4j.helpers.MessageFormatter;
+
 public class Translations {
 
     private static final Joiner LINE_JOINER = Joiner.on("\n");
@@ -23,6 +25,10 @@ public class Translations {
 
     public static String get(String key) {
         return translations.getOrDefault(key, key);
+    }
+
+    public static String get(String key, String... values) {
+        return MessageFormatter.arrayFormat(translations.getOrDefault(key, key), values).getMessage();
     }
 
     private static String joiner(String... string) {
