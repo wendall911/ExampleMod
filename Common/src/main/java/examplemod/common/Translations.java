@@ -13,7 +13,8 @@ public class Translations {
     private static final Map<String, String> translations = Maps.newHashMap();
 
     static {
-        translations.put("general", "General Settings");
+        translations.put("general.title", "General Settings");
+        translations.put("general", "General settings section description.");
         translations.put("debugenabled", joiner(
             "Show debug info.",
             "And do other stuff."
