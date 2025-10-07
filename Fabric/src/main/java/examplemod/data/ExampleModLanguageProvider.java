@@ -22,8 +22,7 @@ public class ExampleModLanguageProvider extends FabricLanguageProvider {
         builder.add("itemGroup." + ExampleMod.MODID, ExampleMod.MOD_NAME);
         addItem(builder, ExampleModItems.exampleItemId, "Example Item Name");
         addTranslationTitle(builder, "Example Mod");
-        addTranslationName(builder, "general", "General Settings");
-        addTranslationDescription(builder, "general");
+        addTranslation(builder, "general");
         addTranslationName(builder, "debugenabled", "Enable Debug");
         addTranslationDescription(builder, "debugenabled");
         addTranslationName(builder, "items", "Item Settings");
@@ -48,6 +47,11 @@ public class ExampleModLanguageProvider extends FabricLanguageProvider {
 
     private void addTranslationDescription(TranslationBuilder builder, String id) {
         builder.add(ExampleMod.MODID + ".configuration." + id + ".description", Translations.get(id));
+    }
+
+    private void addTranslation(TranslationBuilder buildder, String id) {
+        addTranslationName(buildder, id, Translations.get(id + ".title"));
+        addTranslationDescription(buildder, id);
     }
 
     private void addTranslationDescription(TranslationBuilder builder, String id, String key) {
