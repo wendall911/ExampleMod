@@ -5,7 +5,7 @@
   "examplemod.configuration.disableexampleitem.name": "Disable Example Item",
   "examplemod.configuration.exampleitemdurability.description": "Example item durability.",
   "examplemod.configuration.exampleitemdurability.name": "Example Item Durability",
-  "examplemod.configuration.general.description": "General Settings",
+  "examplemod.configuration.general.description": "General settings section description.",
   "examplemod.configuration.general.name": "General Settings",
   "examplemod.configuration.items.description": "Item Settings",
   "examplemod.configuration.items.name": "Item Settings",
