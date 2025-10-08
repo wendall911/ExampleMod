@@ -30,8 +30,8 @@ dependencies {
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"
     */
 
-    modCompileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
-    modCompileOnly "mezz.jei:jei-${minecraft_version}-fabric:${jei_version}"
+    modCompileOnly "mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}"
+    modCompileOnly "mezz.jei:jei-${jei_minecraft_version}-fabric:${jei_version}"
 
     modLocalRuntime group: 'com.terraformersmc', name: 'modmenu', version: "${mod_menu_version}"
 
