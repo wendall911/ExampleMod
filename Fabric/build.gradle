@@ -116,6 +116,7 @@ processResources {
         exclude '**/recipes/*'
     }
 }
+processResources.outputs.upToDateWhen { false }
 
 tasks.withType(JavaCompile) {
     source(project(":Common").sourceSets.main.allSource)

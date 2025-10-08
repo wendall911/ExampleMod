@@ -149,6 +149,7 @@ processResources {
         expand replaceProperties
     }
 }
+processResources.outputs.upToDateWhen { false }
 
 tasks.jarJar.finalizedBy('reobfJar')
 jar.finalizedBy('reobfJarJar')
