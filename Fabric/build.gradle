@@ -62,6 +62,7 @@ loom {
         }
         commonDatagen {
             client()
+            setConfigName("${mod_name} Common Datagen")
             vmArg "-D${mod_id}.common_datagen=1"
             vmArg "-Dfabric-api.datagen"
             vmArg "-Dfabric-api.datagen.modid=${mod_id}"
