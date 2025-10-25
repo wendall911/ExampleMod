@@ -50,10 +50,8 @@ dependencies {
 
     compileOnly "mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${jei_minecraft_version}-neoforge:${jei_version}"
-    /*
-     * TODO Re-enable REI when it is released
-    implementation "mezz.jei:jei-${jei_minecraft_version}-neoforge:${jei_version}"
-    */
+
+    runtimeOnly "mezz.jei:jei-${jei_minecraft_version}-neoforge:${jei_version}"
 
     compileOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
 
