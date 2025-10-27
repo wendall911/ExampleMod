@@ -1,8 +1,5 @@
 package examplemod.config;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import technology.roughness.whitenoise.config.WhiteNoiseConfigSpec;
@@ -11,7 +8,6 @@ public class ConfigHandler {
 
     public static final WhiteNoiseConfigSpec CLIENT_SPEC;
     public static final WhiteNoiseConfigSpec COMMON_SPEC;
-    public static final Map<String, Boolean> conditionsMap = new HashMap<>();
 
     private static final Client CLIENT;
     private static final Common COMMON;
@@ -28,9 +24,6 @@ public class ConfigHandler {
     }
 
     public static void init() {
-		conditionsMap.clear();
-		conditionsMap.put("disableExampleItem", Common.disableExampleItem());
-
         loaded = true;
     }
 
@@ -79,6 +72,13 @@ public class ConfigHandler {
 
         public static int exampleItemDurability() {
             return COMMON.exampleItemDurability.get();
+        }
+
+        public static boolean getConfigValue(String key) {
+            return switch (key) {
+                case "disableExampleItem" -> disableExampleItem();
+                default -> false;
+            };
         }
 
     }
