@@ -24,7 +24,7 @@ public record ConfigResourceCondition(String configValue) implements ICondition 
 
     @Override
     public boolean test(@NotNull IContext context) {
-        return !ConfigHandler.conditionsMap.getOrDefault(configValue, false);
+        return !ConfigHandler.Common.getConfigValue(configValue);
     }
 
     @Override
