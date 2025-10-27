@@ -12,7 +12,6 @@ import net.fabricmc.fabric.api.resource.conditions.v1.ResourceCondition;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditionType;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 
 import examplemod.config.ConfigHandler;
@@ -38,7 +37,7 @@ public record ConfigResourceCondition(String configValue) implements ResourceCon
 
     @Override
     public boolean test(RegistryOps.@Nullable RegistryInfoLookup registryInfoLookup) {
-        return !ConfigHandler.conditionsMap.getOrDefault(configValue, false);
+        return !ConfigHandler.Common.getConfigValue(configValue);
     }
 
 }
