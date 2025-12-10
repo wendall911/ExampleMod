@@ -1,4 +1,5 @@
 package examplemod.client.integration.jei;
+/*
 
 import java.util.Collections;
 
@@ -9,7 +10,7 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 
@@ -22,7 +23,7 @@ import static examplemod.util.ResourceLocationHelper.prefix;
 public class JEIPlugin implements IModPlugin {
 
     @Override
-    public @NotNull ResourceLocation getPluginUid() {
+    public @NotNull Identifier getPluginUid() {
         return prefix("jei_plugin");
     }
 
@@ -36,3 +37,4 @@ public class JEIPlugin implements IModPlugin {
     }
 
 }
+*/

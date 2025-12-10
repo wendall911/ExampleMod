@@ -6,7 +6,7 @@ import java.util.function.BiConsumer;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 
 import examplemod.config.ConfigHandler;
@@ -15,7 +15,7 @@ import static examplemod.util.ResourceLocationHelper.prefix;
 
 public final class ExampleModItems {
 
-    private static final Map<ResourceLocation, Item> ALL = new LinkedHashMap<>();
+    private static final Map<Identifier, Item> ALL = new LinkedHashMap<>();
 
     public static final String exampleItemId = "example_item";
     
@@ -25,7 +25,7 @@ public final class ExampleModItems {
     );
 
     private static <T extends Item> T make(String id, T item) {
-        ResourceLocation loc = prefix(id);
+        Identifier loc = prefix(id);
 
         if (ALL.put(loc, item) != null) {
             throw new IllegalArgumentException("Duplicate Item: " + loc);
@@ -38,13 +38,13 @@ public final class ExampleModItems {
         return new Item.Properties().setId(ResourceKey.create(Registries.ITEM, prefix(id)));
     }
 
-    public static void registerItems(BiConsumer<Item, ResourceLocation> consumer) {
-        for (Map.Entry<ResourceLocation, Item> entry : ALL.entrySet()) {
+    public static void registerItems(BiConsumer<Item, Identifier> consumer) {
+        for (Map.Entry<Identifier, Item> entry : ALL.entrySet()) {
             consumer.accept(entry.getValue(), entry.getKey());
         }
     }
 
-    public static Map<ResourceLocation, Item> getAll() {
+    public static Map<Identifier, Item> getAll() {
         return ALL;
     }
 

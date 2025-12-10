@@ -3,6 +3,7 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
+def identifier = "${mod_id}-${minecraft_version}-neoforge"
 def modLoader = "${project.name}".toUpperCase()
 def actualVersion = version
 version = "${version}-${modLoader}"
@@ -14,10 +15,6 @@ neoForge {
     def at = project(':Common').file('src/main/resources/META-INF/accesstransformer.cfg')
     if (at.exists()) {
         accessTransformers.from(at.absolutePath)
-    }
-    parchment {
-        minecraftVersion = mappings_minecraft_version
-        mappingsVersion = mappings_version
     }
     runs {
         configureEach {
@@ -49,7 +46,7 @@ dependencies {
     compileOnly "mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${jei_minecraft_version}-neoforge:${jei_version}"
 
-    runtimeOnly "mezz.jei:jei-${jei_minecraft_version}-neoforge:${jei_version}"
+    compileOnly "mezz.jei:jei-${jei_minecraft_version}-neoforge:${jei_version}"
 
     compileOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
 
@@ -62,7 +59,7 @@ sourceSets.main.resources {
 }
 
 def changelogFile = project(":").projectDir.toString() + '/build/libs/changelog.txt'
-def publishFile = project(":").projectDir.toString() + "/NeoForge/build/libs/${archivesBaseName}-${version}.jar"
+def publishFile = project(":").projectDir.toString() + "/NeoForge/build/libs/${identifier}-${version}.jar"
 def display_name = "${project.name} ${minecraft_version}-${version}"
 def display_version = "${minecraft_version}-${version}"
 
@@ -131,10 +128,17 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId project.group
-            artifactId project.archivesBaseName
+            artifactId identifier
             version project.version
             // This gives us the built version NeoForge requires
             artifact jar
+        }
+    }
+    repositories {
+        if (System.getenv('local_maven') != null) {
+            maven {
+                url 'file://' + System.getenv('local_maven')
+            }
         }
     }
 }

@@ -6,9 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
-import net.minecraft.tags.TagBuilder;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 
 public class CommonItemTagProvider extends IntrinsicHolderTagsProvider<Item> {
 

@@ -6,7 +6,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import examplemod.common.item.ExampleModItems;
 
@@ -23,7 +23,7 @@ public class ExampleModFabric implements ModInitializer {
         ExampleModItems.registerItems(bind(BuiltInRegistries.ITEM));
     }
 
-    private static <T> BiConsumer<T, ResourceLocation> bind(Registry<? super T> registry) {
+    private static <T> BiConsumer<T, Identifier> bind(Registry<? super T> registry) {
         return (t, id) -> Registry.register(registry, id, t);
     }
 

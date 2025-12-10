@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -42,7 +42,7 @@ public class ExampleModNeoForge {
 
     private void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            for (Map.Entry<ResourceLocation, Item> entry : ExampleModItems.getAll().entrySet()) {
+            for (Map.Entry<Identifier, Item> entry : ExampleModItems.getAll().entrySet()) {
                 Item item = entry.getValue();
 
                 if (item != null) {
@@ -67,7 +67,7 @@ public class ExampleModNeoForge {
         ConfigHandler.init();
     }
 
-    private static <T> void bind(IEventBus eventBus, ResourceKey<Registry<T>> registry, Consumer<BiConsumer<T, ResourceLocation>> source) {
+    private static <T> void bind(IEventBus eventBus, ResourceKey<Registry<T>> registry, Consumer<BiConsumer<T, Identifier>> source) {
         eventBus.addListener((RegisterEvent event) -> {
             if (registry.equals(event.getRegistryKey())) {
                 source.accept((t, rl) -> event.register(registry, rl, () -> t));

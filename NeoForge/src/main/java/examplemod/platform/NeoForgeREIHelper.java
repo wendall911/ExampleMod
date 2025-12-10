@@ -25,7 +25,8 @@ public class NeoForgeREIHelper implements IREIHelper {
             input.add(EntryIngredients.ofIngredient(ingredient));
         });
 
-        helper.add(new DefaultCustomDisplay(input, Collections.singletonList(EntryIngredients.of(result)), Optional.of(recipe.id().location())));
+        // TODO Enable once REI is updated
+        //helper.add(new DefaultCustomDisplay(input, Collections.singletonList(EntryIngredients.of(result)), Optional.of(recipe.id().identifier())));
     }
 
     @Override
