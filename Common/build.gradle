@@ -77,3 +77,15 @@ def updates = tasks.register("generateUpdates", Copy) {
 tasks.generateUpdates.mustRunAfter('jar')
 
 tasks.build.dependsOn('changelog', 'generateUpdates')
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId project.group
+            artifactId project.archivesBaseName
+            version project.version
+            from components.java
+        }
+    }
+}
