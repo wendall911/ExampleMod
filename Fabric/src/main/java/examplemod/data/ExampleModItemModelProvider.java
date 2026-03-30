@@ -1,7 +1,7 @@
 package examplemod.data;
 
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -11,7 +11,7 @@ import examplemod.common.item.ExampleModItems;
 
 public class ExampleModItemModelProvider extends FabricModelProvider {
 
-    public ExampleModItemModelProvider(FabricDataOutput output) {
+    public ExampleModItemModelProvider(FabricPackOutput output) {
         super(output);
     }
 

@@ -22,15 +22,17 @@ public class FabricREIHelper implements IREIHelper {
     @Override
     public void addCustomDisplay(DisplayRegistry helper, List<EntryIngredient> input, RecipeHolder<CraftingRecipe> recipe, ItemStack result) {
         recipe.value().placementInfo().ingredients().forEach(ingredient -> {
-            input.add(EntryIngredients.ofIngredient(ingredient));
+            // TODO: Fix when REI is updated
+            //input.add(EntryIngredients.ofIngredient(ingredient));
         });
 
-        helper.add(new DefaultCustomDisplay(input, Collections.singletonList(EntryIngredients.of(result)), Optional.of(recipe.id().identifier())));
+        //helper.add(new DefaultCustomDisplay(input, Collections.singletonList(EntryIngredients.of(result)), Optional.of(recipe.id().identifier())));
     }
 
     @Override
     public boolean isVanillaItemType(EntryStack<?> entryStack) {
-        return entryStack.getType() == VanillaEntryTypes.ITEM;
+        return true;
+        //return entryStack.getType() == VanillaEntryTypes.ITEM;
     }
 
 }
