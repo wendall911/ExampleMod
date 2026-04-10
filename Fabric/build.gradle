@@ -119,6 +119,7 @@ publishMods {
             optional('creeper-fireworks')
             optional('homeostatic')
             optional('homeostatic-seasons')
+            optional('mobchampions')
             optional('simpletextoverlay')
             optional('ready-player-fun')
         }
@@ -135,6 +136,7 @@ publishMods {
             optional('creeper-fireworks-mod')
             optional('homeostatic')
             optional('homeostatic-seasons')
+            optional('mobchampions')
             optional('simpletextoverlay')
             optional('ready-player-fun')
         }
@@ -158,13 +160,6 @@ publishing {
             artifactId "${mod_id}-${minecraft_version}-fabric"
             version project.version
             from components.java
-        }
-    }
-    repositories {
-        if (System.getenv('local_maven') != null) {
-            maven {
-                url 'file://' + System.getenv('local_maven')
-            }
         }
     }
 }
