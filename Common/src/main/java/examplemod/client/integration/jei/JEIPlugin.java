@@ -1,9 +1,8 @@
 package examplemod.client.integration.jei;
-/*
 
 import java.util.Collections;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -23,12 +22,12 @@ import static examplemod.util.ResourceLocationHelper.prefix;
 public class JEIPlugin implements IModPlugin {
 
     @Override
-    public @NotNull Identifier getPluginUid() {
+    public @NonNull Identifier getPluginUid() {
         return prefix("jei_plugin");
     }
 
     @Override
-    public void registerRecipes(@NotNull IRecipeRegistration registration) {
+    public void registerRecipes(@NonNull IRecipeRegistration registration) {
 
         if (ConfigHandler.Common.disableExampleItem()) {
             registration.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK,
@@ -37,4 +36,3 @@ public class JEIPlugin implements IModPlugin {
     }
 
 }
-*/

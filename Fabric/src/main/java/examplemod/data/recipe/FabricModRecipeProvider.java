@@ -2,7 +2,7 @@ package examplemod.data.recipe;
 
 import java.util.concurrent.CompletableFuture;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -22,12 +22,12 @@ public class FabricModRecipeProvider extends FabricRecipeProvider {
     }
 
     @Override
-    public @NotNull String getName() {
+    public @NonNull String getName() {
         return ExampleMod.MOD_NAME + " - Fabric Recipes";
     }
 
     @Override
-    protected @NotNull RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput recipeOutput) {
+    protected @NonNull RecipeProvider createRecipeProvider(HolderLookup.Provider registries, @NonNull RecipeOutput recipeOutput) {
         HolderLookup.RegistryLookup<Item> itemRegistry = registries.lookupOrThrow(Registries.ITEM);
 
         RecipeProviderBase.exampleItem(itemRegistry).save(withConditions(
