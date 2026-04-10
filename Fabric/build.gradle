@@ -153,9 +153,16 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId project.group
-            artifactId identifier
+            artifactId "${mod_id}-${minecraft_version}-fabric"
             version project.version
             from components.java
+        }
+    }
+    repositories {
+        if (System.getenv('local_maven') != null) {
+            maven {
+                url 'file://' + System.getenv('local_maven')
+            }
         }
     }
 }
