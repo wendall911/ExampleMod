@@ -31,10 +31,10 @@ dependencies {
     compileOnly "mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${jei_minecraft_version}-fabric:${jei_version}"
 
-    runtimeOnly group: 'com.terraformersmc', name: 'modmenu', version: "${mod_menu_version}"
+    localRuntime group: 'com.terraformersmc', name: 'modmenu', version: "${mod_menu_version}"
 
     // Testing Mods
-    //modRuntimeOnly "curse.maven:mod-XXX:XXX"
+    //localRuntime "curse.maven:mod-XXX:XXX"
 }
 
 loom {
