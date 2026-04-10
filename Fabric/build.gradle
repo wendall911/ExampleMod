@@ -118,6 +118,7 @@ publishMods {
             optional('charged-charms')
             optional('creeper-fireworks')
             optional('homeostatic')
+            optional('homeostatic-seasons')
             optional('simpletextoverlay')
             optional('ready-player-fun')
         }
@@ -133,6 +134,7 @@ publishMods {
             optional('charged-charms')
             optional('creeper-fireworks-mod')
             optional('homeostatic')
+            optional('homeostatic-seasons')
             optional('simpletextoverlay')
             optional('ready-player-fun')
         }
