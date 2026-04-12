@@ -91,8 +91,8 @@ publishMods {
             optional('homeostatic-seasons')
             optional('magical-psi-revival')
             optional('mobchampions')
-            optional('simpletextoverlay')
             optional('ready-player-fun')
+            optional('simpletextoverlay')
             optional('survivalist-essentials')
             optional('tinkersurvival')
         }
@@ -110,8 +110,8 @@ publishMods {
             optional('homeostatic-seasons')
             optional('magical-psi-revival')
             optional('mobchampions')
-            optional('simpletextoverlay')
             optional('ready-player-fun')
+            optional('simpletextoverlay')
             optional('survivalist-essentials')
             optional('tinkersurvival')
         }
