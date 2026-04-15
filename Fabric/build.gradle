@@ -120,8 +120,9 @@ publishMods {
             optional('homeostatic')
             optional('homeostatic-seasons')
             optional('mobchampions')
-            optional('simpletextoverlay')
             optional('ready-player-fun')
+            optional('simpletextoverlay')
+            optional('survivalist-essentials')
         }
     }
     if (project.hasProperty("${modrinth_api_key_prop}")) {
@@ -137,8 +138,9 @@ publishMods {
             optional('homeostatic')
             optional('homeostatic-seasons')
             optional('mobchampions')
-            optional('simpletextoverlay')
             optional('ready-player-fun')
+            optional('simpletextoverlay')
+            optional('survivalist-essentials')
         }
     }
     if (project.hasProperty("${discord_webhook_prop}")) {
