@@ -1,14 +1,11 @@
 # ExampleMod — Project Context
 
 ## What This Is
-A multi-loader mod template and personal starter for new wendall911 mods. Derived from
-MultiLoader-Template (forked for faster maintenance). Contains instructions for creating
-a new mod from scratch — see `README.md` for the full setup walkthrough.
+A multi-loader mod template and personal starter for new wendall911 mods. Derived from MultiLoader-Template (forked for faster maintenance). Contains instructions for creating a new mod from scratch — see `README.md` for the full setup walkthrough.
 
 This is not a deployable mod. It serves two purposes:
 1. Starter scaffold for new mods
-2. Playground for testing new Minecraft versions — updated first after WhiteNoise
-   and Handbook are ready for a new version
+2. Playground for testing new Minecraft versions — updated first after WhiteNoise and Handbook are ready for a new version
 
 ## Project Structure
 - `Common/` — shared mod logic, no modloader-specific APIs
@@ -27,5 +24,4 @@ This is not a deployable mod. It serves two purposes:
 - Integration test mods: JEI, REI, ModMenu, Cloth Config
 
 ## Status
-Fairly complete but needs consistency updates across maintained branches
-(1.20.1, 1.21.1, 26.1). Agent-assisted update work is planned.
+Fairly complete but needs consistency updates across maintained branches (1.20.1, 1.21.1, 26.1).
