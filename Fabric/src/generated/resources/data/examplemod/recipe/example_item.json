@@ -6,7 +6,6 @@
     }
   ],
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "K": "minecraft:kelp",
     "N": "minecraft:iron_nugget"
@@ -17,7 +16,6 @@
     "NNN"
   ],
   "result": {
-    "count": 1,
     "id": "examplemod:example_item"
   }
 }
