@@ -2,6 +2,8 @@ package examplemod.data;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.jspecify.annotations.NonNull;
+
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 
@@ -14,8 +16,7 @@ public class FabricBlockTagProvider extends FabricTagsProvider.BlockTagsProvider
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider arg) {
-
+    protected void addTags(HolderLookup.@NonNull Provider provider) {
     }
 
 }
