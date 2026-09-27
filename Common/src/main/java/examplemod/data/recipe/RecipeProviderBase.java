@@ -10,6 +10,7 @@ import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.advancements.triggers.Criterion;
 import net.minecraft.advancements.triggers.InventoryChangeTrigger;
 import net.minecraft.advancements.triggers.InventoryChangeTrigger.TriggerInstance;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -31,12 +32,12 @@ import static examplemod.util.ResourceLocationHelper.prefix;
 
 public class RecipeProviderBase {
 
-    private static Criterion<InventoryChangeTrigger.TriggerInstance> has(HolderLookup.RegistryLookup<Item> itemRegistry, TagKey<Item> pTag) {
-        return inventoryTrigger(ItemPredicate.Builder.item().of(itemRegistry, pTag).build());
+    private static Criterion<InventoryChangeTrigger.TriggerInstance> has(HolderGetter<Item> items, TagKey<Item> pTag) {
+        return inventoryTrigger(ItemPredicate.Builder.item().of(items, pTag).build());
     }
 
-    private static Criterion<TriggerInstance> has(HolderLookup.RegistryLookup<Item> itemRegistry, ItemLike pItemLike) {
-        return inventoryTrigger(ItemPredicate.Builder.item().of(itemRegistry, pItemLike).build());
+    private static Criterion<TriggerInstance> has(HolderGetter<Item> items, ItemLike pItemLike) {
+        return inventoryTrigger(ItemPredicate.Builder.item().of(items, pItemLike).build());
     }
 
     private static Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate... predicates) {
@@ -59,14 +60,14 @@ public class RecipeProviderBase {
     /*
      * Example shaped recipe
      */
-    protected static ShapedRecipeBuilder exampleItem(HolderLookup.RegistryLookup<Item> itemRegistry) {
-        return ShapedRecipeBuilder.shaped(itemRegistry, RecipeCategory.MISC, ExampleModItems.exampleItem)
+    protected static ShapedRecipeBuilder exampleItem(HolderGetter<Item> items) {
+        return ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, ExampleModItems.exampleItem)
             .define('N', Items.IRON_NUGGET)
             .define('K', Items.KELP)
             .pattern("NNN")
             .pattern("NKN")
             .pattern("NNN")
-            .unlockedBy("has_item", has(itemRegistry, Items.KELP));
+            .unlockedBy("has_item", has(items, Items.KELP));
     }
 
 }
