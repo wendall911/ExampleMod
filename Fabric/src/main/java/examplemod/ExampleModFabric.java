@@ -9,6 +9,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 
 import examplemod.common.item.ExampleModItems;
+import examplemod.data.recipe.ConfigResourceCondition;
 
 public class ExampleModFabric implements ModInitializer {
 
@@ -21,6 +22,7 @@ public class ExampleModFabric implements ModInitializer {
 
     private void registryInit() {
         ExampleModItems.registerItems(bind(BuiltInRegistries.ITEM));
+        ConfigResourceCondition.register();
     }
 
     private static <T> BiConsumer<T, Identifier> bind(Registry<? super T> registry) {
