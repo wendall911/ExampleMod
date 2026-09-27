@@ -19,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "examplemod:example_item"
+        "recipes": "examplemod:example_item"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
